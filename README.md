@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garena Free Fire - Secure Account Injector v9.4</title>
+    <title>FFH4X VIP V9.4 // MOD MENU</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -26,218 +25,114 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(3, 7, 18, 0.9);
+            background: rgba(5, 8, 20, 0.85);
             z-index: 0;
         }
 
-        /* LOGIN / ID LINK SCREEN */
-        #loginScreen {
+        /* FLOATING ICON BUTTON */
+        #floatIcon {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 100px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff3366, #ff0033);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 51, 0.6);
+            z-index: 9999;
+            user-select: none;
+            border: 2px solid #fff;
+            animation: pulseIcon 2s infinite;
         }
 
-        .login-card {
+        @keyframes pulseIcon {
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 0, 51, 0.6); }
+            50% { transform: scale(1.08); box-shadow: 0 0 30px rgba(255, 0, 51, 0.9); }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 0, 51, 0.6); }
+        }
+
+        /* MOD MENU CONTAINER */
+        #modMenu {
+            position: absolute;
+            top: 80px;
+            left: 110px;
+            width: 380px;
             background: rgba(18, 22, 35, 0.95);
             border: 1px solid rgba(255, 0, 51, 0.4);
-            border-radius: 16px;
-            padding: 40px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-            text-align: center;
+            border-radius: 14px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
             backdrop-filter: blur(10px);
         }
 
-        .login-card h2 {
-            color: #fff;
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-
-        .login-card p {
-            color: #94a3b8;
-            font-size: 0.85rem;
-            margin-bottom: 24px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            color: #cbd5e1;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px 16px;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid #334155;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 0.95rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .input-group input:focus {
-            border-color: #ff0033;
-            box-shadow: 0 0 10px rgba(255, 0, 51, 0.2);
-        }
-
-        .connect-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #ff0033, #cc0029);
+        .menu-header {
+            background: linear-gradient(90deg, #ff0033, #ff3366);
             color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 8px;
+            padding: 12px 16px;
             font-weight: 600;
             font-size: 0.95rem;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 0, 51, 0.4);
-        }
-
-        .connect-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 0, 51, 0.6);
-        }
-
-        /* LOADING TERMINAL OVERLAY */
-        #loadingScreen {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(3, 7, 18, 0.98);
-            z-index: 1001;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #00ff66;
-            font-family: 'Share Tech Mono', monospace;
-            padding: 20px;
-        }
-
-        .terminal-box {
-            width: 100%;
-            max-width: 500px;
-            background: rgba(0, 20, 5, 0.4);
-            border: 1px solid #008833;
-            border-radius: 8px;
-            padding: 20px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            height: 220px;
-            overflow-y: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        /* DASHBOARD / MOD MENU INTERFACE */
-        #dashboardScreen {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            display: none;
-            z-index: 1000;
-            padding: 30px;
-            overflow-y: auto;
-        }
-
-        .dash-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(18, 22, 35, 0.9);
-            border: 1px solid rgba(255, 0, 51, 0.3);
-            padding: 15px 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            backdrop-filter: blur(10px);
+            cursor: move;
         }
 
-        .user-badge {
-            color: #fff;
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .user-badge span {
-            color: #ff0033;
-        }
-
-        .logout-btn {
-            background: rgba(255, 0, 51, 0.2);
-            color: #ff0033;
-            border: 1px solid #ff0033;
-            padding: 6px 16px;
-            border-radius: 6px;
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
             cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: 0.3s;
+            font-weight: 700;
         }
 
-        .logout-btn:hover {
-            background: #ff0033;
-            color: #fff;
+        .menu-body {
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .controls-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .control-card {
-            background: rgba(18, 22, 35, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .card-title {
-            font-size: 0.8rem;
+        .section-title {
+            font-size: 0.75rem;
             text-transform: uppercase;
-            color: #ff0033;
+            color: #ff3366;
             font-weight: 700;
             letter-spacing: 1px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 0, 51, 0.2);
-            padding-bottom: 6px;
+            margin-top: 5px;
+            border-bottom: 1px solid rgba(255, 51, 102, 0.2);
+            padding-bottom: 3px;
         }
 
         .control-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 10px 12px;
             border-radius: 8px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .control-label {
             color: #e2e8f0;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             font-weight: 500;
         }
 
-        /* TOGGLE SWITCH */
+        /* CUSTOM TOGGLE SWITCH */
         .switch {
             position: relative;
             display: inline-block;
@@ -245,7 +140,11 @@
             height: 22px;
         }
 
-        .switch input { opacity: 0; width: 0; height: 0; }
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
         .slider {
             position: absolute;
@@ -268,11 +167,16 @@
             border-radius: 50%;
         }
 
-        input:checked + .slider { background-color: #ff0033; }
-        input:checked + .slider:before { transform: translateX(22px); }
+        input:checked + .slider {
+            background-color: #ff0033;
+        }
 
-        /* NOTIFICATION TOAST */
-        #toast {
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
+        /* LOG STATUS TOAST */
+        #statusToast {
             position: fixed;
             bottom: 25px;
             right: 25px;
@@ -283,7 +187,7 @@
             border-radius: 8px;
             font-size: 0.85rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            z-index: 2000;
+            z-index: 10001;
             display: none;
             animation: slideIn 0.3s ease forwards;
         }
@@ -296,139 +200,128 @@
 </head>
 <body>
 
-    <!-- 1. LOGIN SCREEN -->
-    <div id="loginScreen">
-        <div class="login-card">
-            <h2>Free Fire Portal</h2>
-            <p>Enter your player UID to sync session credentials</p>
-            <div class="input-group">
-                <label>PLAYER UID</label>
-                <input type="text" id="uidInput" placeholder="e.g. 482910492" autocomplete="off">
+    <!-- FLOATING GAME ICON -->
+    <div id="floatIcon" onclick="toggleMenu()">FF</div>
+
+    <!-- VIP MOD MENU PANEL -->
+    <div id="modMenu">
+        <div class="menu-header" id="menuHeader">
+            <span>🔥 FFH4X VIP MENU v9.4</span>
+            <button class="close-btn" onclick="toggleMenu()">&times;</button>
+        </div>
+        <div class="menu-body">
+            <div class="section-title">Combat Enhancements</div>
+            <div class="control-row">
+                <span class="control-label">AimLock 99% Headshot</span>
+                <label class="switch">
+                    <input type="checkbox" onchange="triggerAlert('AimLock Headshot Activated [99% Accuracy]')">
+                    <span class="slider"></span>
+                </label>
             </div>
-            <button class="connect-btn" onclick="startConnection()">Connect & Launch</button>
-        </div>
-    </div>
-
-    <!-- 2. LOADING SCREEN -->
-    <div id="loadingScreen">
-        <div class="terminal-box" id="terminalLog">
-            <div>[+] Initializing secure tunnel socket...</div>
-        </div>
-    </div>
-
-    <!-- 3. DASHBOARD / MOD MENU INTERFACE -->
-    <div id="dashboardScreen">
-        <div class="dash-header">
-            <div class="user-badge">Connected UID: <span id="displayUid">0000000</span></div>
-            <button class="logout-btn" onclick="logoutSession()">Disconnect</button>
-        </div>
-
-        <div class="controls-grid">
-            <div class="control-card">
-                <div class="card-title">Combat & Targeting Matrix</div>
-                <div class="control-row">
-                    <span class="control-label">AimLock 99% Headshot</span>
-                    <label class="switch">
-                        <input type="checkbox" onchange="showToast('AimLock matrix synchronized to server')">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="control-row">
-                    <span class="control-label">Magic Bullet / Hitbox Offset</span>
-                    <label class="switch">
-                        <input type="checkbox" onchange="showToast('Hitbox redirection parameters locked')">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="control-row">
-                    <span class="control-label">Zero Weapon Recoil</span>
-                    <label class="switch">
-                        <input type="checkbox" onchange="showToast('Recoil compensation active')">
-                        <span class="slider"></span>
-                    </label>
-                </div>
+            <div class="control-row">
+                <span class="control-label">Fov Magic Bullet</span>
+                <label class="switch">
+                    <input type="checkbox" onchange="triggerAlert('Magic Bullet trajectory adjusted')">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="control-row">
+                <span class="control-label">No Recoil / Steady Aim</span>
+                <label class="switch">
+                    <input type="checkbox" onchange="triggerAlert('Weapon recoil parameters cleared')">
+                    <span class="slider"></span>
+                </label>
             </div>
 
-            <div class="control-card">
-                <div class="card-title">Defense & Survival Protection</div>
-                <div class="control-row">
-                    <span class="control-label">Godmode / Damage Nullifier</span>
-                    <label class="switch">
-                        <input type="checkbox" onchange="showToast('Incoming damage packets neutralized')">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="control-row">
-                    <span class="control-label">Fast Medkit / Movement</span>
-                    <label class="switch">
-                        <input type="checkbox" onchange="showToast('Animation delays bypassed')">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="control-row">
-                    <span class="control-label">Anti-Ban Telemetry Mask</span>
-                    <label class="switch" checked>
-                        <input type="checkbox" checked onchange="showToast('Server security signature hidden')">
-                        <span class="slider"></span>
-                    </label>
-                </div>
+            <div class="section-title">Visuals & ESP</div>
+            <div class="control-row">
+                <span class="control-label">ESP Line / Skeleton</span>
+                <label class="switch">
+                    <input type="checkbox" onchange="triggerAlert('ESP Player skeleton lines enabled')">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="control-row">
+                <span class="control-label">ESP Box & Distance</span>
+                <label class="switch">
+                    <input type="checkbox" onchange="triggerAlert('Enemy box tracking renderer active')">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="section-title">System Bypass</div>
+            <div class="control-row">
+                <span class="control-label">Anti-Ban Protection</span>
+                <label class="switch" checked>
+                    <input type="checkbox" checked onchange="triggerAlert('Telemetry hooks and logs masked')">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="control-row">
+                <span class="control-label">Speed Hack (x2.5)</span>
+                <label class="switch">
+                    <input type="checkbox" onchange="triggerAlert('Movement speed multiplier locked')">
+                    <span class="slider"></span>
+                </label>
             </div>
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATION -->
-    <div id="toast">Notification text</div>
+    <!-- STATUS NOTIFICATION TOAST -->
+    <div id="statusToast">Status message goes here</div>
 
     <script>
-        function startConnection() {
-            const uid = document.getElementById('uidInput').value.trim();
-            if (!uid) {
-                alert('Please enter a valid Player UID.');
-                return;
+        function toggleMenu() {
+            const menu = document.getElementById('modMenu');
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
             }
-
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('loadingScreen').style.display = 'flex';
-
-            const logBox = document.getElementById('terminalLog');
-            const logs = [
-                `[+] Binding socket to UID: ${uid}...`,
-                `[+] Bypassing Garena security gatekeeper...`,
-                `[+] Injecting memory payloads into server instance...`,
-                `[+] Synchronization successful. Loading profile...`
-            ];
-
-            let index = 0;
-            const interval = setInterval(() => {
-                if (index < logs.length) {
-                    logBox.innerHTML += `<div>${logs[index]}</div>`;
-                    index++;
-                } else {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        document.getElementById('loadingScreen').style.display = 'none';
-                        document.getElementById('dashboardScreen').style.display = 'block';
-                        document.getElementById('displayUid').textContent = uid;
-                        showToast('Account successfully linked & modified!');
-                    }, 800);
-                }
-            }, 600);
         }
 
-        function logoutSession() {
-            document.getElementById('dashboardScreen').style.display = 'none';
-            document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('uidInput').value = '';
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toast');
+        function triggerAlert(message) {
+            const toast = document.getElementById('statusToast');
             toast.textContent = "[✔] " + message;
             toast.style.display = 'block';
+            
             setTimeout(() => {
                 toast.style.display = 'none';
             }, 2500);
         }
+
+        // Make the floating icon and menu draggable for a realistic feel
+        const floatIcon = document.getElementById('floatIcon');
+        let isDragging = false, startX, startY, initialX, initialY;
+
+        floatIcon.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+
+        function dragStart(e) {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            initialX = floatIcon.offsetLeft;
+            initialY = floatIcon.offsetTop;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            floatIcon.style.left = (initialX + dx) + 'px';
+            floatIcon.style.top = (initialY + dy) + 'px';
+            
+            // Move menu along with it
+            const menu = document.getElementById('modMenu');
+            menu.style.left = (initialX + dx + 80) + 'px';
+            menu.style.top = (initialY + dy - 20) + 'px';
+        }
+
+        function dragEnd() {
+            isDragging = false;
+        }
     </script>
 </body>
-</html>
+</html> 
